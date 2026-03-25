@@ -57,7 +57,6 @@ function createSlide({ image, title }) {
 }
 
 export default async function decorate(block) {
-    return;
   block.classList.add('carousel');
 
   await loadSwiper();
