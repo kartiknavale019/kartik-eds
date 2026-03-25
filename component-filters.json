@@ -28,8 +28,12 @@
   {
     "id": "carousel",
     "components": [
-      "slide"
+      "carousel-item"
     ]
+  },
+  {
+    "id": "carousel-item",
+    "components": []
   },
   {
     "id": "columns",
