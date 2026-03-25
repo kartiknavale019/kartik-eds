@@ -1,33 +1,3 @@
-async function loadSwiper() {
-  if (!window.Swiper) {
-    await Promise.all([
-      loadCSS('/blocks/carousel/swiper-bundle.min.css'),
-      loadScript('/blocks/carousel/swiper-bundle.min.js'),
-    ]);
-  }
-}
-
-function loadCSS(href) {
-  return new Promise((resolve) => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    link.onload = resolve;
-    document.head.append(link);
-  });
-}
-
-function loadScript(src) {
-  return new Promise((resolve) => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.defer = true;
-    script.onload = resolve;
-    document.body.append(script);
-  });
-}
-
-// 🔥 Get structured data (based on your setup)
 function getData(block) {
   try {
     return JSON.parse(block.textContent);
@@ -38,7 +8,7 @@ function getData(block) {
 
 function createSlide({ image, title }) {
   const slide = document.createElement('div');
-  slide.className = 'swiper-slide';
+  slide.className = 'carousel-slide';
 
   if (image) {
     const img = document.createElement('img');
@@ -48,53 +18,76 @@ function createSlide({ image, title }) {
   }
 
   if (title) {
-    const heading = document.createElement('h3');
-    heading.textContent = title;
-    slide.appendChild(heading);
+    const titleEl = document.createElement('h3');
+    titleEl.textContent = title;
+    slide.appendChild(titleEl);
   }
 
   return slide;
 }
 
-export default async function decorate(block) {
+export default function decorate(block) {
   block.classList.add('carousel');
 
-  await loadSwiper();
-
   const data = getData(block);
+  const slides = data.slides || [];
 
-  const swiperEl = document.createElement('div');
-  swiperEl.className = 'swiper';
+  if (!slides.length) return;
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'swiper-wrapper';
+  let current = 0;
 
-  (data.slides || []).forEach((slide) => {
-    wrapper.appendChild(createSlide(slide));
+  // Track
+  const track = document.createElement('div');
+  track.className = 'carousel-track';
+
+  slides.forEach((slide) => {
+    track.appendChild(createSlide(slide));
   });
 
-  const pagination = document.createElement('div');
-  pagination.className = 'swiper-pagination';
+  // Buttons
+  const prev = document.createElement('button');
+  prev.className = 'carousel-prev';
+  prev.innerHTML = '‹';
 
-  swiperEl.append(wrapper, pagination);
+  const next = document.createElement('button');
+  next.className = 'carousel-next';
+  next.innerHTML = '›';
 
+  function update() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  function goNext() {
+    current = (current + 1) % slides.length;
+    update();
+  }
+
+  function goPrev() {
+    current = (current - 1 + slides.length) % slides.length;
+    update();
+  }
+
+  next.addEventListener('click', goNext);
+  prev.addEventListener('click', goPrev);
+
+  // Autoplay
+  let interval;
+  if (data.autoplay) {
+    interval = setInterval(goNext, 3000);
+  }
+
+  // Pause on hover (senior touch)
+  block.addEventListener('mouseenter', () => {
+    if (interval) clearInterval(interval);
+  });
+
+  block.addEventListener('mouseleave', () => {
+    if (data.autoplay) interval = setInterval(goNext, 3000);
+  });
+
+  // Render
   block.innerHTML = '';
-  block.appendChild(swiperEl);
+  block.append(prev, track, next);
 
-  new Swiper(swiperEl, {
-    loop: true,
-    slidesPerView: 1,
-
-    autoplay: data.autoplay
-      ? {
-          delay: 3000,
-          disableOnInteraction: false,
-        }
-      : false,
-
-    pagination: {
-      el: pagination,
-      clickable: true,
-    },
-  });
+  update();
 }
