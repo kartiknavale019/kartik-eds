@@ -27,6 +27,7 @@ function createSlide({ image, title }) {
 }
 
 export default function decorate(block) {
+    return;
   block.classList.add('carousel');
 
 //   const data = getData(block);
