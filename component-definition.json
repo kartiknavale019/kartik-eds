@@ -83,6 +83,21 @@
       "id": "blocks",
       "components": [
         {
+          "title": "address Cards",
+          "id": "address-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/column/v1/column",
+                "template": {
+                  "columns": "2",
+                  "rows": "1"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {

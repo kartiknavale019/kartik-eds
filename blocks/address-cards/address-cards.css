@@ -1,0 +1,63 @@
+/* Main container for all cards */
+.address-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  margin: 0;
+}
+
+/* Individual card styling */
+.address-cards .address-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Slight hover effect to make it feel interactive */
+.address-cards .address-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Card Title */
+.address-cards .address-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+/* Card Address Text */
+.address-cards .address-card p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #4b5563;
+  line-height: 1.5;
+  flex-grow: 1; /* This pushes the button to the bottom evenly across all cards */
+}
+
+/* The 'Get Directions' Button */
+.address-cards .address-card a.button {
+  display: inline-block;
+  text-align: center;
+  background-color: #0054ff; /* AEM default blue, feel free to change */
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+  align-self: flex-start; /* Prevents the button from stretching full width */
+}
+
+/* Button Hover State */
+.address-cards .address-card a.button:hover {
+  background-color: #0043cc;
+}

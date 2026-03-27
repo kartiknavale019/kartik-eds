@@ -1,108 +1,37 @@
-function getData(block) {
-  try {
-    return JSON.parse(block.textContent);
-  } catch {
-    return {};
-  }
-}
-
-function createSlide({ image, title }) {
-  const slide = document.createElement('div');
-  slide.className = 'carousel-slide';
-
-  if (image) {
-    const img = document.createElement('img');
-    img.src = image;
-    img.alt = title || '';
-    slide.appendChild(img);
-  }
-
-  if (title) {
-    const titleEl = document.createElement('h3');
-    titleEl.textContent = title;
-    slide.appendChild(titleEl);
-  }
-
-  return slide;
-}
+import Swiper from './swiper.min.js';
 
 export default function decorate(block) {
-    return;
-  block.classList.add('carousel');
+    block.parentElement.classList.add('swiper');
+    block.classList.add('swiper-wrapper');
+    
+    Array.from(block.children).forEach((column) => {
+        column.classList.add('swiper-slide');
+        console.log(column);
+    });
 
-//   const data = getData(block);
-//   const slides = data.slides || [];
-const slideElements = [...block.children];
-const slides = slideElements.map((slideEl) => {
-  const img = slideEl.querySelector('img');
-  const title = slideEl.textContent.trim();
+    let newSwiper = block.parentElement;
 
-  return {
-    image: img?.src,
-    title,
-  };
-});
+    // 1. Uncommented your buttons and placed them BEFORE Swiper initializes
+    let leftBunton = document.createElement('button');
+    leftBunton.classList.add('swiper-button-prev');
+    leftBunton.innerHTML = '<img src="/icons/search.svg" alt="Previous"/>';
+    block.parentElement.appendChild(leftBunton);
+    
+    let rightButton = document.createElement('button');
+    rightButton.classList.add('swiper-button-next');
+    rightButton.innerHTML = '<img src="/icons/search.svg" alt="Next"/>';
+    block.parentElement.appendChild(rightButton);   
 
-console.log('Slides:', slides.length); // debug
-
-  
-
-  if (!slides.length) return;
-
-  let current = 0;
-
-  // Track
-  const track = document.createElement('div');
-  track.className = 'carousel-track';
-
-  slides.forEach((slide) => {
-    track.appendChild(createSlide(slide));
-  });
-
-  // Buttons
-  const prev = document.createElement('button');
-  prev.className = 'carousel-prev';
-  prev.innerHTML = '‹';
-
-  const next = document.createElement('button');
-  next.className = 'carousel-next';
-  next.innerHTML = '›';
-
-  function update() {
-    track.style.transform = `translateX(-${current * 100}%)`;
-  }
-
-  function goNext() {
-    current = (current + 1) % slides.length;
-    update();
-  }
-
-  function goPrev() {
-    current = (current - 1 + slides.length) % slides.length;
-    update();
-  }
-
-  next.addEventListener('click', goNext);
-  prev.addEventListener('click', goPrev);
-
-  // Autoplay
-  let interval;
-  if (data.autoplay) {
-    interval = setInterval(goNext, 3000);
-  }
-
-  // Pause on hover (senior touch)
-  block.addEventListener('mouseenter', () => {
-    if (interval) clearInterval(interval);
-  });
-
-  block.addEventListener('mouseleave', () => {
-    if (data.autoplay) interval = setInterval(goNext, 3000);
-  });
-
-  // Render
-  block.innerHTML = '';
-  block.append(prev, track, next);
-
-  update();
+    // 2. Added 'new' to properly initialize the Swiper instance
+    new Swiper(newSwiper, {
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+    });
 }
