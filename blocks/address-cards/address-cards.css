@@ -39,14 +39,14 @@
   margin-bottom: 1.5rem;
   color: #4b5563;
   line-height: 1.5;
-  flex-grow: 1; /* This pushes the button to the bottom evenly across all cards */
+  flex-grow: 1;  
 }
 
 /* The 'Get Directions' Button */
 .address-cards .address-card a.button {
   display: inline-block;
   text-align: center;
-  background-color: #0054ff; /* AEM default blue, feel free to change */
+  background-color: #0054ff; 
   color: #ffffff;
   padding: 0.75rem 1.25rem;
   border-radius: 4px;
@@ -54,7 +54,7 @@
   font-weight: 600;
   font-size: 0.875rem;
   transition: background-color 0.2s ease;
-  align-self: flex-start; /* Prevents the button from stretching full width */
+  align-self: flex-start;  
 }
 
 /* Button Hover State */

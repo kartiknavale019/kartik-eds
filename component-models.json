@@ -145,25 +145,25 @@
     "id": "address-cards",
     "fields": [
       {
-        "component": "reference",
+        "component": "text",
         "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "name": "title",
+        "label": "Location Title",
+        "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
+        "name": "address",
+        "label": "Full Address",
         "value": ""
       },
       {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Button Text",
+        "value": "Get Directions"
       }
     ]
   },
