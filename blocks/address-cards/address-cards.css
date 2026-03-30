@@ -61,3 +61,20 @@
 .address-cards .address-card a.button:hover {
   background-color: #0043cc;
 }
+/*  */
+main .section:has(.address-cards-wrapper) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  main .section:has(.address-cards-wrapper) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.address-cards-wrapper {
+  margin: 0 !important;
+}
