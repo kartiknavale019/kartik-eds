@@ -46,5 +46,11 @@
       "button",
       "title"
     ]
+  },
+  {
+    "id": "demo-table-rows",
+    "components": [
+      "demo-table-row"
+    ]
   }
 ]

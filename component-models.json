@@ -225,6 +225,32 @@
     ]
   },
   {
+    "id": "demo-table-row",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1",
+        "label": "Column 1 (Left)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2",
+        "label": "Column 2 (Middle)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col3",
+        "label": "Column 3 (Right)",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
