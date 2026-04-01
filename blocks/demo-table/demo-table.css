@@ -1,57 +1,38 @@
-/* 1. The main container */
+/* Outer wrapper to allow horizontal scrolling on mobile */
 .demo-table {
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+/* The actual table styling */
+.custom-demo-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  margin: 2rem 0;
-  overflow: hidden;
-  /* Override AEM's default block spacing */
-  gap: 0 !important; 
-  padding: 0 !important;
-  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* 2. Make every authored row a 3-column Grid */
-.demo-table > div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid #e5e7eb;
-  /* Force the rows to touch each other with no gaps */
-  margin: 0 !important; 
-  padding: 0 !important;
+/* Headers */
+.custom-demo-table th {
+  background-color: #f3f4f6;
+  color: #111827;
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid #d1d5db;
 }
 
-/* Remove the border from the very last row */
-.demo-table > div:last-child {
-  border-bottom: none;
-}
-
-/* 3. The individual text cells */
-.demo-table > div > div {
+/* Data Cells */
+.custom-demo-table td {
   padding: 1rem 1.5rem;
   color: #4b5563;
-  /* Stop AEM from adding margins to the text */
-  margin: 0 !important; 
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* 4. Target the very first row to act as the Header */
-.demo-table > div:first-child {
-  background-color: #f3f4f6;
-  font-weight: 600;
-  color: #111827;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-}
-
-/* 5. Add Zebra striping for the remaining rows */
-.demo-table > div:nth-child(even):not(:first-child) {
-  background-color: #f9fafb;
-}
-
-/* Row hover effect */
-.demo-table > div:hover:not(:first-child) {
-  background-color: #f3f4f6;
-  transition: background-color 0.2s ease-in-out;
+/* Remove bottom border from the very last row */
+.custom-demo-table tr:last-child td {
+  border-bottom: none;
 }
