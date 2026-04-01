@@ -3,29 +3,37 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin: 2rem 0;
-  border-radius: 8px;
   border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin: 2rem 0;
   overflow: hidden;
+  /* Override AEM's default block spacing */
+  gap: 0 !important; 
+  padding: 0 !important;
+  background-color: #ffffff;
 }
 
 /* 2. Make every authored row a 3-column Grid */
 .demo-table > div {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-columns: repeat(3, 1fr);
   border-bottom: 1px solid #e5e7eb;
+  /* Force the rows to touch each other with no gaps */
+  margin: 0 !important; 
+  padding: 0 !important;
 }
 
+/* Remove the border from the very last row */
 .demo-table > div:last-child {
   border-bottom: none;
 }
 
-/* 3. The individual cells */
+/* 3. The individual text cells */
 .demo-table > div > div {
   padding: 1rem 1.5rem;
   color: #4b5563;
+  /* Stop AEM from adding margins to the text */
+  margin: 0 !important; 
 }
 
 /* 4. Target the very first row to act as the Header */
@@ -35,10 +43,9 @@
   color: #111827;
   text-transform: uppercase;
   font-size: 0.875rem;
-  border-bottom: 2px solid #d1d5db;
 }
 
-/* 5. Add Zebra striping for readability on the remaining rows */
+/* 5. Add Zebra striping for the remaining rows */
 .demo-table > div:nth-child(even):not(:first-child) {
   background-color: #f9fafb;
 }
