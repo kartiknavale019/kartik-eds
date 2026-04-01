@@ -1,46 +1,43 @@
-
+/* 1. Make the outer block behave like a <table> */
 .demo-table {
+  display: table;
   width: 100%;
-  overflow-x: auto;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
 }
 
-.custom-demo-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: inherit;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
+/* 2. Make each authored row behave like a <tr> */
+.demo-table > div {
+  display: table-row;
 }
 
-.custom-demo-table thead tr {
-  background-color: #f3f4f6;
-  color: #111827;
-  text-align: left;
-  border-bottom: 2px solid #e5e7eb;
-}
-
-.custom-demo-table th {
-  padding: 1rem 1.5rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
-}
-
-.custom-demo-table td {
+/* 3. Make each authored column field behave like a <td> */
+.demo-table > div > div {
+  display: table-cell;
   padding: 1rem 1.5rem;
   color: #4b5563;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.custom-demo-table tbody tr:nth-child(even) {
+/* 4. Target the very first row to act as the Header (like <th>) */
+.demo-table > div:first-child > div {
+  background-color: #f3f4f6;
+  color: #111827;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* 5. Add Zebra striping for readability on the remaining rows */
+.demo-table > div:nth-child(even) > div {
   background-color: #f9fafb;
 }
 
-.custom-demo-table tbody tr:hover {
+/* Row hover effect */
+.demo-table > div:hover:not(:first-child) > div {
   background-color: #f3f4f6;
   transition: background-color 0.2s ease-in-out;
 }
